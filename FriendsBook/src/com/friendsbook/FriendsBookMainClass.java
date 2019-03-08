@@ -2,6 +2,8 @@ package com.friendsbook;
 
 import java.util.Scanner;
 
+import com.friendsbook.action.RegisterUser;
+
 public class FriendsBookMainClass {
 
 	public void showAuthenticationOption(){
@@ -36,6 +38,7 @@ public class FriendsBookMainClass {
 			case 1:
 				break;
 			case 2:
+				System.out.println(new RegisterUser().registerUser());
 				break;
 			default:
 				System.out.println("Invalid option selected, Please try again");
