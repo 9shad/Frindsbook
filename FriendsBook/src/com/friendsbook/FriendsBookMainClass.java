@@ -16,18 +16,6 @@ public class FriendsBookMainClass {
 		System.out.print("Please Enter your choice: ");
 	}
 	
-	public void showFeaturesOption(){
-		System.out.println("1. Select an update and post");
-		System.out.println("2. Check Notifications");
-		System.out.println("3. Create a new post");
-		System.out.println("4. View Friends List");
-		System.out.println("5. Update Profile");
-		System.out.println("6. Send a Message");
-		System.out.println("7. Send a Friend Request");
-		System.out.println("8. See Hashtag in trends");
-		System.out.print("Please Enter your choice: ");
-	}
-	
 	public static void main(String[] args){
 		FriendsBookMainClass obj = new FriendsBookMainClass();
 		Scanner sc = new Scanner(System.in);
