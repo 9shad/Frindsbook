@@ -14,10 +14,16 @@ public class AuthenticateUser {
 		System.out.print("Enter User Id: ");
 		String userId = sc.next();
 		System.out.print("Enter Password: ");
-		String password = cnsl.readPassword().toString();
+		String password = null;
+		if(cnsl != null){
+			 password = cnsl.readPassword().toString();
+		}else{
+			password = sc.next();
+		}
+		
 		User user = this.login(userId, password);
 		if(user != null){
-			
+		
 		}else{
 			System.out.println("Invalid Credentials, please try again!");
 		}

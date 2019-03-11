@@ -6,6 +6,7 @@ import com.friendsbook.beans.User;
 import com.friendsbook.beans.UserInformation;
 
 public class AuthorizedUser {
+	
 	private void showApplicationFeatures(){
 		System.out.println();
 		System.out.println("1. Select an update and post");
@@ -21,14 +22,14 @@ public class AuthorizedUser {
 	}
 	
 	public void provideAccess(User user){
-
 		Scanner sc = new Scanner(System.in);
 		int optionSelected = 0;
 		boolean userInitilized = false;
 		do{
 			showApplicationFeatures();
+
 			optionSelected = sc.nextInt();
-			
+
 			if(optionSelected != 9 && !userInitilized){
 				UserInformation userInfo = new UserInformation(user);
 				userInitilized = true;
@@ -56,7 +57,6 @@ public class AuthorizedUser {
 			default:
 				break;
 			}
-			
 			
 		}while(optionSelected !=9);
 		

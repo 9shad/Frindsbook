@@ -5,11 +5,11 @@ import java.util.List;
 public class UserInformation{
 
 	private User user;
-	private List<UserPost> userPosts;
-	private List<UserFriend> userFriendsList;
-	private List<UserFriendRequest> userFriendRequests;
-	private List<UserNotification> userNotifications;
-	private List<UserMessage> userMessages;
+	private List<UserPost> postsForUser;
+	private List<UserFriend> userFriendList;
+	private List<UserFriendRequest> friendRequestForUser;
+	private List<UserNotification> notificationsForUser;
+	private List<UserMessage> messagesForUser;
 	
 	public UserInformation(User user) {
 		super();
@@ -26,35 +26,45 @@ public class UserInformation{
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public List<UserPost> getUserPosts() {
-		return userPosts;
+
+	public List<UserPost> getPostsForUser() {
+		return postsForUser;
 	}
-	public void setUserPosts(List<UserPost> userPosts) {
-		this.userPosts = userPosts;
+
+	public void setPostsForUser(List<UserPost> postsForUser) {
+		this.postsForUser = postsForUser;
 	}
-	public List<UserFriend> getUserFriendsList() {
-		return userFriendsList;
+
+	public List<UserFriend> getUserFriendList() {
+		return userFriendList;
 	}
-	public void setUserFriendsList(List<UserFriend> userFriendsList) {
-		this.userFriendsList = userFriendsList;
+
+	public void setUserFriendList(List<UserFriend> userFriendList) {
+		this.userFriendList = userFriendList;
 	}
-	public List<UserFriendRequest> getUserFriendRequests() {
-		return userFriendRequests;
+
+	public List<UserFriendRequest> getFriendRequestForUser() {
+		return friendRequestForUser;
 	}
-	public void setUserFriendRequests(List<UserFriendRequest> userFriendRequests) {
-		this.userFriendRequests = userFriendRequests;
+
+	public void setFriendRequestForUser(List<UserFriendRequest> friendRequestForUser) {
+		this.friendRequestForUser = friendRequestForUser;
 	}
-	public List<UserNotification> getUserNotifications() {
-		return userNotifications;
+
+	public List<UserNotification> getNotificationsForUser() {
+		return notificationsForUser;
 	}
-	public void setUserNotifications(List<UserNotification> userNotifications) {
-		this.userNotifications = userNotifications;
+
+	public void setNotificationsForUser(List<UserNotification> notificationsForUser) {
+		this.notificationsForUser = notificationsForUser;
 	}
-	public List<UserMessage> getUserMessages() {
-		return userMessages;
+
+	public List<UserMessage> getMessagesForUser() {
+		return messagesForUser;
 	}
-	public void setUserMessages(List<UserMessage> userMessages) {
-		this.userMessages = userMessages;
+
+	public void setMessagesForUser(List<UserMessage> messagesForUser) {
+		this.messagesForUser = messagesForUser;
 	}
 
 }

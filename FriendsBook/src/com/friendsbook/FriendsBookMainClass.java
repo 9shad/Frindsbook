@@ -2,6 +2,9 @@ package com.friendsbook;
 
 import java.util.Scanner;
 
+import sun.text.normalizer.ICUBinary.Authenticate;
+
+import com.friendsbook.action.AuthenticateUser;
 import com.friendsbook.action.RegisterUser;
 
 public class FriendsBookMainClass {
@@ -22,14 +25,19 @@ public class FriendsBookMainClass {
 		int inputOption = 0;
 		do{
 			obj.showAuthenticationOption();
-			switch(sc.nextInt()){
+			inputOption = sc.nextInt();
+			switch(inputOption){
 			case 1:
+				new AuthenticateUser().login();
 				break;
 			case 2:
 				System.out.println(new RegisterUser().registerUser());
 				break;
+			case 3:
+				System.out.println("Good Bye, see you soon!!");
+				break;
 			default:
-				System.out.println("Invalid option selected, Please try again");
+				System.out.println("Invalid option!, Please try again");
 				break;
 			}
 		}while(inputOption != 3);
