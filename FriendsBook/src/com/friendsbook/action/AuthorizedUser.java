@@ -9,14 +9,14 @@ public class AuthorizedUser {
 	
 	private void showApplicationFeatures(){
 		System.out.println();
-		System.out.println("1. Select an update and post");
-		System.out.println("2. Check Notifications");
+		//System.out.println("1. Select an update and post");
+		//System.out.println("2. Check Notifications");
 		System.out.println("3. Create a new post");
-		System.out.println("4. View Friends List");
+		//System.out.println("4. View Friends List");
 		System.out.println("5. Update Profile");
-		System.out.println("6. Send a Message");
+		//System.out.println("6. Send a Message");
 		System.out.println("7. Send a Friend Request");
-		System.out.println("8. See Hashtag in trends");
+		//System.out.println("8. See Hashtag in trends");
 		System.out.println("9. Logout");
 		System.out.print("Please Enter your choice: ");
 	}
@@ -41,23 +41,29 @@ public class AuthorizedUser {
 			case 2:
 				break;
 			case 3:
+				CreatePost createPost = new CreatePost();
+				createPost.createPost(user.getUserId());
 				break;
 			case 4:
 				break;
 			case 5:
+				UpdateProfile updateProfile = new UpdateProfile();
+				System.out.println(updateProfile.updateProfile(user));
 				break;
 			case 6:
 				break;
 			case 7:
+				SendFriendRequest sendRequest = new SendFriendRequest();
+				sendRequest.sendRequest(user.getUserId());
 				break;
 			case 8:
 				break;
 			case 9:
+				user = null;
 				break;
 			default:
 				break;
-			}
-			
+			}		
 		}while(optionSelected !=9);
 		
 	}

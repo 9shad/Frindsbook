@@ -3,10 +3,10 @@ package com.friendsbook.action;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+import com.friendsbook.DAO.UserPostDAO;
 import com.friendsbook.beans.UserPost;
 
 public class CreatePost {
-	
 	
 	public void createPost(String userId){
 		Scanner sc = new Scanner(System.in);
@@ -23,14 +23,10 @@ public class CreatePost {
 		}else{
 			System.out.println("Oops! something went wrong, please try again.");
 		}
-		
-		sc.close();
 	}
 
 	private boolean createPost(UserPost post){
-		
-		
-		return false;
+		return UserPostDAO.createPostDAO(post);
 	}
 	
 }
