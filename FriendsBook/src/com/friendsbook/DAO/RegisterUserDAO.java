@@ -45,7 +45,7 @@ public class RegisterUserDAO {
 		}finally{
 			try {
 				ps.close();
-				con.close();
+				//con.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -69,13 +69,12 @@ public class RegisterUserDAO {
 				return true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			try {
 				rs.close();
 				ps.close();
-				con.close();
+				//con.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

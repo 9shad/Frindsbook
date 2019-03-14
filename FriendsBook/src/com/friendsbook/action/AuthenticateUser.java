@@ -23,7 +23,8 @@ public class AuthenticateUser {
 		
 		User user = this.login(userId, password);
 		if(user != null){
-		
+			AuthorizedUser au = new AuthorizedUser();
+			au.provideAccess(user);
 		}else{
 			System.out.println("Invalid Credentials, please try again!");
 		}

@@ -10,6 +10,7 @@ import com.friendsbook.action.RegisterUser;
 public class FriendsBookMainClass {
 
 	public void showAuthenticationOption(){
+		System.out.println();
 		System.out.println("######################################");
 		System.out.println("\tWelcome to Friends Book");
 		System.out.println("######################################");

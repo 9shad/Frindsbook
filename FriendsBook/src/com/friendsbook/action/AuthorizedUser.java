@@ -7,8 +7,11 @@ import com.friendsbook.beans.UserInformation;
 
 public class AuthorizedUser {
 	
-	private void showApplicationFeatures(){
+	private void showApplicationFeatures(String userName){
 		System.out.println();
+		System.out.println("######################################");
+		System.out.println("\tWelcome back "+ userName +"!!");
+		System.out.println("######################################");
 		//System.out.println("1. Select an update and post");
 		//System.out.println("2. Check Notifications");
 		System.out.println("3. Create a new post");
@@ -26,7 +29,7 @@ public class AuthorizedUser {
 		int optionSelected = 0;
 		boolean userInitilized = false;
 		do{
-			showApplicationFeatures();
+			showApplicationFeatures(user.getName());
 
 			optionSelected = sc.nextInt();
 
