@@ -10,7 +10,7 @@ import com.friendsbook.datasource.Connector;
 public class UpdateProfileDAO {
 
 	public static boolean updateUserProfileDAO(User user, String changeLog){
-		
+		//TODO: update the change log information to user post table for users friend to see the update
 		Connection con = null;
 		PreparedStatement ps = null;
 		final String QUERY = "update useraccount set name = ?, gender = ?, school_name = ?, birthday = ? where user_id=?";
@@ -29,7 +29,6 @@ public class UpdateProfileDAO {
 				return true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
@@ -40,9 +39,8 @@ public class UpdateProfileDAO {
 		}finally{
 			try {
 				ps.close();
-				con.close();
+				//con.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

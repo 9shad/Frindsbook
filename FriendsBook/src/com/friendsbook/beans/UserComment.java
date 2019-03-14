@@ -13,7 +13,7 @@ public class UserComment {
 	public UserComment(int commentId) {
 		super();
 		this.commentId = commentId;
-		//write code to initialize object based on comment Id
+		//TODO: write code to initialize object based on comment Id
 	}
 	
 	public int getPostId() {

@@ -25,8 +25,8 @@ public class UserPost {
 	}
 	
 	public UserPost(int postId){
-		//write code to initialize single post
-		//initialize comment
+		//TODO: write code to initialize single post
+		//TODO: initialize respective comments
 	}
 	
 	public int getPostId() {

@@ -16,7 +16,7 @@ public class NotificationDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		final String QUERY = "insert into user_notification values(?,?,?,?)";
+		final String QUERY = "insert into user_notification (notification_type,status,user_id,timestamp) values(?,?,?,?)";
 		
 		try {
 			con = Connector.getConnection();
@@ -55,7 +55,7 @@ public class NotificationDAO {
 			try {
 				rs.close();
 				ps.close();
-				con.close();
+				//con.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

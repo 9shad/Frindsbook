@@ -10,3 +10,21 @@ CREATE TABLE `useraccount` (
  PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
+CREATE TABLE `user_notification` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `notification_type` varchar(20) NOT NULL,
+ `status` varchar(20) NOT NULL,
+ `user_id` varchar(10) NOT NULL,
+ `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `friend_request` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `notification_id` int(11) NOT NULL,
+ `from_userid` varchar(10) NOT NULL,
+ `to_userid` varchar(10) NOT NULL,
+ `status` varchar(15) NOT NULL,
+ `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

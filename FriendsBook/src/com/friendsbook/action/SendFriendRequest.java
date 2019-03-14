@@ -12,7 +12,7 @@ public class SendFriendRequest {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter User Id to send Request: ");
 		String toUserId = sc.next();
-		
+		//TODO: ensure logged in userID and toUserId is different
 		if(RegisterUserDAO.checkUserId(toUserId)){
 			UserFriendRequest obj = new UserFriendRequest();
 			obj.setFromUserId(userId);

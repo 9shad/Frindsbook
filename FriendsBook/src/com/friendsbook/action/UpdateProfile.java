@@ -16,14 +16,17 @@ public class UpdateProfile {
 		System.out.print("Do you wish to update name? [y:n] : ");
 		if(sc.next().equalsIgnoreCase("y")){
 			System.out.print("Enter name: ");
-			user.setName(sc.next());
+			sc.nextLine(); // to consume the \n character
+			user.setName(sc.nextLine());
 			description.append("User "+usr.getUserId() +" updated name to: "+user.getName()+"\n");
 		}
 		System.out.print("Do you wish to update gender? [y:n] : ");
 		if(sc.next().equalsIgnoreCase("y")){
 			if(usr.getGender().equals("male")){
+				System.out.println("Gender updated to female");
 				user.setGender("female");
 			}else if(usr.getGender().equals("female")){
+				System.out.println("Gender updated to male");
 				user.setGender("male");
 			}
 			description.append("User "+usr.getUserId() +" updated gender to : "+user.getGender()+"\n");
@@ -62,10 +65,14 @@ public class UpdateProfile {
 			description.append("User "+usr.getUserId() +" updated birthdate to: " + user.getBirthdayDate()+"\n");
 		}
 		
-		usr.setName(user.getName());
-		usr.setGender(user.getGender());
-		usr.setSchoolName(user.getSchoolName());
-		usr.setBirthdayDate(user.getBirthdayDate());
+		if (user.getName() != null)
+			usr.setName(user.getName());
+		if(user.getGender() != null)
+			usr.setGender(user.getGender());
+		if(user.getSchoolName() != null)
+			usr.setSchoolName(user.getSchoolName());
+		if(user.getBirthdayDate() != null)
+			usr.setBirthdayDate(user.getBirthdayDate());
 		
 		if(description.length() != 0){
 			if(updateProfile(usr, description.toString())){

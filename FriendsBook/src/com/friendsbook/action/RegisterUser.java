@@ -30,7 +30,8 @@ public class RegisterUser {
 		user.setPassword(EncryptPassword.cryptWithMD5(user.getPassword()));
 		
 		System.out.print("Enter your name: ");
-		user.setName(sc.next());
+		sc.nextLine();
+		user.setName(sc.nextLine());
 		
 		System.out.print("Select your gender: 1. Male, 2.Female :");
 		switch(sc.nextInt()){

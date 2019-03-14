@@ -12,7 +12,7 @@ public class UserFriend {
 	public UserFriend(String userId) {
 		super();
 		this.userId = userId;
-		//generate other fields using DAO for displaying user friend profile
+		//TODO: generate other fields using DAO for displaying user friend profile
 	}
 
 	public UserFriend(String userId, String name) {

@@ -13,16 +13,16 @@ public class SendFriendRequestDAO {
 		
 		Connection con = null;
 		PreparedStatement ps = null;
-		final String QUERY = "insert into friend_request values(?,?,?,?,?)";
+		final String QUERY = "insert into friend_request(notification_id, from_userid,to_userid,status,timestamp) values(?,?,?,?,?)";
 		
 		try {
 			con = Connector.getConnection();
 			con.setAutoCommit(false);
 			ps = con.prepareStatement(QUERY);
-			ps.setString(1, userRequest.getFromUserId());
-			ps.setString(2, userRequest.getToUserId());
-			ps.setString(3, userRequest.getStatus());
-			ps.setTimestamp(4, java.sql.Timestamp.valueOf(userRequest.getTimeStamp()));
+			ps.setString(2, userRequest.getFromUserId());
+			ps.setString(3, userRequest.getToUserId());
+			ps.setString(4, userRequest.getStatus());
+			ps.setTimestamp(5, java.sql.Timestamp.valueOf(userRequest.getTimeStamp()));
 			
 			UserNotification userNotification = new UserNotification();
 			userNotification.setNotificationType(UserNotification.FRIEND_REQUEST);
@@ -33,14 +33,15 @@ public class SendFriendRequestDAO {
 				return false;
 			}
 			
-			ps.setInt(5, userRequest.getNotificationId());
+			ps.setInt(1, userRequest.getNotificationId());
 			
 			if(ps.executeUpdate() != 1){
 				con.rollback();
 				return false;
+			}else{
+				con.commit();
+				return true;
 			}
-			
-			return true;
 			
 		} catch (SQLException e) {
 			try {
@@ -52,13 +53,11 @@ public class SendFriendRequestDAO {
 		}finally{
 			try {
 				ps.close();
-				con.close();
+				//con.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
-		
 		return false;
 	}
 }

@@ -16,7 +16,7 @@ public class UserInformation{
 		this.user = user;
 		
 		/**
-		 * Create DAO to intitailze user information from system as soon as user logged in
+		 * TODO: Create DAO to intitailze user information from system as soon as user logged in
 		 */
 	}
 	

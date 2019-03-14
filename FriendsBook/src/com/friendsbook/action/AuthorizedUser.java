@@ -14,7 +14,7 @@ public class AuthorizedUser {
 		System.out.println("######################################");
 		//System.out.println("1. Select an update and post");
 		//System.out.println("2. Check Notifications");
-		System.out.println("3. Create a new post");
+		//System.out.println("3. Create a new post");
 		//System.out.println("4. View Friends List");
 		System.out.println("5. Update Profile");
 		//System.out.println("6. Send a Message");
@@ -34,6 +34,7 @@ public class AuthorizedUser {
 			optionSelected = sc.nextInt();
 
 			if(optionSelected != 9 && !userInitilized){
+				//todo: fetch all user related information when userInformation object is created
 				UserInformation userInfo = new UserInformation(user);
 				userInitilized = true;
 			}
