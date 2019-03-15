@@ -152,7 +152,11 @@ public class User {
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return this.userId+ " profile information:\nname=" + name + ",\n gender=" + gender + ",\n schoolName="
+				+ schoolName + ",\n birthdayDate=" + birthdayDate;
+	}
 	
 }

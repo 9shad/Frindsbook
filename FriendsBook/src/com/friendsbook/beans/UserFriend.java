@@ -1,6 +1,8 @@
 package com.friendsbook.beans;
 
 import java.time.LocalDate;
+import java.util.List;
+import com.friendsbook.DAO.ShowFriendListDAO;
 
 public class UserFriend {
 	private String userId;
@@ -12,13 +14,13 @@ public class UserFriend {
 	public UserFriend(String userId) {
 		super();
 		this.userId = userId;
-		//TODO: generate other fields using DAO for displaying user friend profile
-	}
-
-	public UserFriend(String userId, String name) {
-		super();
-		this.userId = userId;
-		this.name = name;
+		List<Object> profileInfo = ShowFriendListDAO.getFriendProfile(userId);
+		if(profileInfo != null){
+			this.name = profileInfo.get(1).toString();
+			this.gender = profileInfo.get(2).toString();
+			this.school = profileInfo.get(3).toString();
+			this.birthdayDate = (LocalDate) profileInfo.get(4);
+		}
 	}
 	
 	public String getUserId() {
