@@ -10,7 +10,7 @@ import com.friendsbook.datasource.Connector;
 
 public class SendFriendRequestDAO {
 	public static boolean sendFriendRequestDAO(UserFriendRequest userRequest){
-		
+		//TODO: before inserting check if same friend request already exists
 		Connection con = null;
 		PreparedStatement ps = null;
 		final String QUERY = "insert into friend_request(notification_id, from_userid,to_userid,status,timestamp) values(?,?,?,?,?)";
