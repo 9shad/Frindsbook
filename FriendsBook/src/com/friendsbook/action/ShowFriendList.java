@@ -8,23 +8,41 @@ import com.friendsbook.DAO.ShowFriendListDAO;
 import com.friendsbook.beans.UserFriend;
 
 public class ShowFriendList {
-	public void displayFriendList(String userId){
-		List<String> friendList = ShowFriendListDAO.getFriendList(userId);
-		Scanner sc = new Scanner(System.in);
-		int option = 0;
-		do {
+	private List<String> friendList;
+	
+	public ShowFriendList(String userId) {
+		friendList = ShowFriendListDAO.getFriendList(userId);
+	}
+	
+	public void displayFriendList(){
+		if(this.friendList != null && !this.friendList.isEmpty()) {
 			AtomicInteger counter = new AtomicInteger(0);
 			System.out.println("\n------Friend List-----");
 			friendList.forEach(obj -> {System.out.println(counter.incrementAndGet() +". "+obj);});
 			System.out.println(counter.incrementAndGet()+". Go Back");
-			System.out.print("Enter your choice to: ");
-			option = sc.nextInt();
-			if(option >=1 && option < counter.get()) {
-				UserFriend friendProfile = new UserFriend(friendList.get(option-1));
-				System.out.println("------Profile Information-----");
-				System.out.println(friendProfile);
-			}
-		}while(option <= friendList.size());
+		}
 	}
+	
+	public void displayFriendsAndProfile(){
+		Scanner sc = new Scanner(System.in);
+		int option = 0;
+		if(this.friendList!=null && !this.friendList.isEmpty()) {
+			do {
+				this.displayFriendList();
+				System.out.print("Enter your choice to: ");
+				option = sc.nextInt();
+				if(option >=1 && option < this.friendList.size()+1) {
+					UserFriend friendProfile = new UserFriend(friendList.get(option-1));
+					System.out.println("------Profile Information-----");
+					System.out.println(friendProfile);
+				}
+			}while(option <= this.friendList.size());
+		}
+	}
+
+	public List<String> getFriendList() {
+		return friendList;
+	}
+	
 	
 }

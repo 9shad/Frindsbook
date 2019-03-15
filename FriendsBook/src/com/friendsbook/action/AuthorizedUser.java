@@ -14,10 +14,10 @@ public class AuthorizedUser {
 		System.out.println("######################################");
 		//System.out.println("1. Select an update and post");
 		//System.out.println("2. Check Notifications");
-		//System.out.println("3. Create a new post");
+		System.out.println("3. Create a new post");
 		System.out.println("4. View Friends List");
 		System.out.println("5. Update Profile");
-		//System.out.println("6. Send a Message");
+		System.out.println("6. Send a Message");
 		System.out.println("7. Send a Friend Request");
 		//System.out.println("8. See Hashtag in trends");
 		System.out.println("9. Logout");
@@ -34,7 +34,7 @@ public class AuthorizedUser {
 			optionSelected = sc.nextInt();
 
 			if(optionSelected != 9 && !userInitilized){
-				//todo: fetch all user related information when userInformation object is created
+				//TODO: fetch all user related information when userInformation object is created
 				UserInformation userInfo = new UserInformation(user);
 				userInitilized = true;
 			}
@@ -49,8 +49,8 @@ public class AuthorizedUser {
 				createPost.createPost(user.getUserId());
 				break;
 			case 4:
-				ShowFriendList showList = new ShowFriendList();
-				showList.displayFriendList(user.getUserId());
+				ShowFriendList showList = new ShowFriendList(user.getUserId());
+				showList.displayFriendsAndProfile();
 				break;
 			case 5:
 				UpdateProfile updateProfile = new UpdateProfile();

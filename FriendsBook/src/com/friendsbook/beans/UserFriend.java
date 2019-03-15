@@ -45,7 +45,7 @@ public class UserFriend {
 
 	@Override
 	public String toString() {
-		return "Friend [name=" + name + ", gender=" + gender + ", school=" + school + ", birthdayDate="
+		return "Friend [name= " + name + ", gender= " + gender + ", school= " + school + ", birthdayDate= "
 				+ birthdayDate + "]";
 	}
 

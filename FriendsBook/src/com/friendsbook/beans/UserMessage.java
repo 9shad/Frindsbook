@@ -8,6 +8,11 @@ public class UserMessage {
 	private String toUser;
 	private String msgDescription;
 	private LocalDateTime timeStamp;
+	private int notificationId;
+	
+	public UserMessage() {
+		this.timeStamp = LocalDateTime.now();
+	}
 	
 	public int getId() {
 		return id;
@@ -53,11 +58,19 @@ public class UserMessage {
 		return "[" + msgDescription + "]";
 	}
 	
-	public String toString(String userId) {
-		if(this.getFromUser().equalsIgnoreCase(userId))
+	public String toString(String fromUserId) {
+		if(this.getFromUser().equalsIgnoreCase(fromUserId))
 			return "[" + fromUser + ": "+ msgDescription + "]";
 		else
 			return "[" + toUser + ": "+ msgDescription + "]";
+	}
+
+	public int getNotificationId() {
+		return notificationId;
+	}
+
+	public void setNotificationId(int notificationId) {
+		this.notificationId = notificationId;
 	}
 	
 }
