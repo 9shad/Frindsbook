@@ -28,3 +28,13 @@ CREATE TABLE `friend_request` (
  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `user_message` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `from_userid` varchar(10) NOT NULL,
+ `to_userid` varchar(10) NOT NULL,
+ `description` varchar(500) NOT NULL,
+ `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ `notification_id` int(11) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

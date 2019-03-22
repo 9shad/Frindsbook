@@ -59,7 +59,7 @@ public class UserMessageDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		final String QUERY = "insert into user_message (from_userid, to_userid, description, timestamp,notification_id) values (?,?,?,?,?)";
+		final String QUERY = "insert into user_message (from_userid, to_userid, description, timestamp, notification_id) values (?,?,?,?,?)";
 		
 		try {
 			con = Connector.getConnection();

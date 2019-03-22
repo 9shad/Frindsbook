@@ -17,7 +17,7 @@ public class SendMessage {
 			int option = 0;
 			do {
 				friends.displayFriendList();
-				System.out.print("Enter your choice to: ");
+				System.out.print("Enter your choice: ");
 				option = sc.nextInt();
 				if(option >=1 && option < friendsList.size()+1) {
 					String toUserId = friendsList.get(option-1);
@@ -25,7 +25,7 @@ public class SendMessage {
 					List<UserMessage> historyMessages = UserMessageDAO.getHistoryMessages(fromUserId, toUserId);
 					if(historyMessages != null && !historyMessages.isEmpty()) {
 						historyMessages.forEach(msg -> {
-									System.out.println(msg.toString(fromUserId));
+									System.out.println(msg.displaySingleHistoryMessage());
 								});
 					}
 					

@@ -41,6 +41,7 @@ public class AuthorizedUser {
 			
 			switch(optionSelected){
 			case 1:
+				
 				break;
 			case 2:
 				break;
@@ -57,6 +58,8 @@ public class AuthorizedUser {
 				System.out.println(updateProfile.updateProfile(user));
 				break;
 			case 6:
+				SendMessage sendMessage = new SendMessage();
+				sendMessage.sendMessage(user.getUserId());
 				break;
 			case 7:
 				SendFriendRequest sendRequest = new SendFriendRequest();
@@ -73,7 +76,4 @@ public class AuthorizedUser {
 		}while(optionSelected !=9);
 		
 	}
-	
-	
-	
 }

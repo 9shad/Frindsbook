@@ -58,11 +58,8 @@ public class UserMessage {
 		return "[" + msgDescription + "]";
 	}
 	
-	public String toString(String fromUserId) {
-		if(this.getFromUser().equalsIgnoreCase(fromUserId))
-			return "[" + fromUser + ": "+ msgDescription + "]";
-		else
-			return "[" + toUser + ": "+ msgDescription + "]";
+	public String displaySingleHistoryMessage() {
+			return "[" + this.fromUser + ": "+ msgDescription + "]";
 	}
 
 	public int getNotificationId() {
