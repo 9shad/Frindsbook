@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.friendsbook.beans.UserHashtag;
 import com.friendsbook.beans.UserPost;
 import com.friendsbook.datasource.Connector;
 
@@ -15,21 +18,44 @@ public class UserPostDAO {
 	public static boolean createPostDAO(UserPost post){
 		Connection con = null;
 		PreparedStatement ps = null;
-		final String QUERY = "insert into post values (?,?,?,?,?)";
-		
+		ResultSet rs = null;
+		final String QUERY = "insert into user_post(post_type,user_id,description,timestamp) values (?,?,?,?)";
+		int postId = -1;
+		List<UserHashtag> tags = new ArrayList<>();
 		try {
 			con = Connector.getConnection();
 			con.setAutoCommit(false);
-			ps = con.prepareStatement(QUERY);
+			ps = con.prepareStatement(QUERY,Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, post.getType());
 			ps.setString(2, post.getUserId());
 			ps.setString(3, post.getDescription());
 			ps.setTimestamp(4, Timestamp.valueOf(post.getTimeStamp()));
-			ps.setInt(5, post.getPostCount());
+			//ps.setInt(5, post.getPostCount());
 			
 			if(ps.executeUpdate() == 1){
-				con.commit();
-				return true;
+				
+				rs = ps.getGeneratedKeys();
+				if (rs.next()) {
+			        postId = rs.getInt(1);
+			    }
+				if(postId != -1){
+					String[] temp = post.getDescription().split(" ");
+					for(int i=0;i<temp.length;i++) {
+			        	if(temp[i].startsWith("#")) {
+			        		UserHashtag hashTag = new UserHashtag(temp[i],postId);
+			        		tags.add(hashTag);
+			        	}
+			        }
+					if(tags.size() == 0) {
+						con.commit();
+						return true;
+					}else if(HashTagDAO.createHashTagDAO(tags)) {
+			        	con.commit();
+				    	return true;
+			        }else {
+			        	con.rollback();
+			        }
+				}
 			}
 		} catch (SQLException e) {
 			try {
@@ -41,7 +67,7 @@ public class UserPostDAO {
 		}finally{
 			try {
 				ps.close();
-				con.close();
+				//con.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -49,7 +75,7 @@ public class UserPostDAO {
 		return false;
 	}
 
-	public static int getMaxPostCountNumber(){
+	/*public static int getMaxPostCountNumber(){
 		Connection con = null;
 		Statement s = null;
 		ResultSet rs;
@@ -69,5 +95,5 @@ public class UserPostDAO {
 			e.printStackTrace();
 		}
 		return 0;
-	}
+	}*/
 }

@@ -21,32 +21,44 @@ public class SendMessage {
 				option = sc.nextInt();
 				if(option >=1 && option < friendsList.size()+1) {
 					String toUserId = friendsList.get(option-1);
+
+					//display history messages
+					displayHistoryMessage(fromUserId, toUserId);
 					
-					List<UserMessage> historyMessages = UserMessageDAO.getHistoryMessages(fromUserId, toUserId);
-					if(historyMessages != null && !historyMessages.isEmpty()) {
-						historyMessages.forEach(msg -> {
-									System.out.println(msg.displaySingleHistoryMessage());
-								});
-					}
-					
+					//accept new message
 					System.out.print("Enter message: ");
 					sc.nextLine();//clearing the \n character
 					String msg = sc.nextLine();
 					
-					UserMessage userMessage = new UserMessage();
-					userMessage.setFromUser(fromUserId);
-					userMessage.setToUser(toUserId);
-					userMessage.setMsgDescription(msg);
-					
-					if(UserMessageDAO.sendMessage(userMessage)) {
-						System.out.println("Message sent!");
-					}else {
-						System.err.println("Oops! something went wrong, please try again.");
-					}
+					//send message
+					sendMessage(fromUserId, toUserId, msg);
 				}
 				
 			}while(option <= friendsList.size());
 			
+		}
+	}
+	
+	
+	public void displayHistoryMessage(String fromUserId, String toUserId) {
+		List<UserMessage> historyMessages = UserMessageDAO.getHistoryMessages(fromUserId, toUserId);
+		if(historyMessages != null && !historyMessages.isEmpty()) {
+			historyMessages.forEach(msg -> {
+						System.out.println(msg.displaySingleHistoryMessage());
+					});
+		}
+	}
+	
+	public void sendMessage(String fromUserId, String toUserId,String msg) {		
+		UserMessage userMessage = new UserMessage();
+		userMessage.setFromUser(fromUserId);
+		userMessage.setToUser(toUserId);
+		userMessage.setMsgDescription(msg);
+		
+		if(UserMessageDAO.sendMessage(userMessage)) {
+			System.out.println("Message sent!");
+		}else {
+			System.err.println("Oops! something went wrong, please try again.");
 		}
 	}
 	

@@ -38,3 +38,18 @@ CREATE TABLE `user_message` (
  `notification_id` int(11) NOT NULL,
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `user_post` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `post_type` varchar(10) NOT NULL,
+ `user_id` varchar(10) NOT NULL,
+ `description` varchar(500) NOT NULL,
+ `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `user_hashtag` (
+ `hashtag` varchar(100) NOT NULL,
+ `post_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+

@@ -8,20 +8,20 @@ import com.friendsbook.DAO.UserPostDAO;
 public class UserPost {
 	public static final String POST = "post";
 	public static final String UPDATE = "update";
-	private static int counter = 0;
+	//private static int counter = 0;
 	
 	private int postId;
 	private String type;
 	private String userId;
 	private String description;
 	private LocalDateTime timeStamp;
-	private int postCount;
+	//private int postCount;
 	private List<UserComment> userComments;
 	
 	public UserPost() {
 		super();
-		counter = UserPostDAO.getMaxPostCountNumber();
-		this.postCount = ++counter;
+		//counter = UserPostDAO.getMaxPostCountNumber();
+		//this.postCount = ++counter;
 	}
 	
 	public UserPost(int postId){
@@ -59,11 +59,18 @@ public class UserPost {
 	public void setTimeStamp(LocalDateTime timeStamp) {
 		this.timeStamp = timeStamp;
 	}
-	public int getPostCount() {
-		return postCount;
-	}
+	//public int getPostCount() {
+		//return postCount;
+	//}
 	public List<UserComment> getUserComments() {
 		return userComments;
 	}
 
+	@Override
+	public String toString() {
+		return "[ " + timeStamp +", "+ description + "\n" +
+				userComments.stream() + "]";
+	}
+
+	
 }

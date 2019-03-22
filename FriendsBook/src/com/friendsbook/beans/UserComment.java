@@ -45,7 +45,7 @@ public class UserComment {
 	@Override
 	public String toString() {
 		//return "UserComment [description=" + description + "]";
-		return "\t" + description;
+		return "\t" +"[ "+ userId +": "+ description +" ]\n";
 	}
 	
 	
