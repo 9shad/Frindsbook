@@ -2,8 +2,8 @@ package com.friendsbook.action;
 
 import java.util.Scanner;
 
+import com.friendsbook.DAO.FriendDAO;
 import com.friendsbook.DAO.RegisterUserDAO;
-import com.friendsbook.DAO.SendFriendRequestDAO;
 import com.friendsbook.beans.UserFriendRequest;
 
 public class SendFriendRequest {
@@ -17,7 +17,7 @@ public class SendFriendRequest {
 			UserFriendRequest obj = new UserFriendRequest();
 			obj.setFromUserId(userId);
 			obj.setToUserId(toUserId);		
-			if(SendFriendRequestDAO.sendFriendRequestDAO(obj)){
+			if(FriendDAO.sendFriendRequestDAO(obj)){
 				System.out.println("Friend Request sent successfully!");
 			}else{
 				System.out.println("Oops! something went wrong, Please try again!!");

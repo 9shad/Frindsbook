@@ -38,8 +38,8 @@ public class UserPostDAO {
 				if (rs.next()) {
 			        postId = rs.getInt(1);
 			    }
-				if(postId != -1){
-					String[] temp = post.getDescription().split(" ");
+				if(postId != -1 && post.getDescription().contains("#")){
+					String[] temp = post.getDescription().split(" "); //we can also use subsring to get index of # and next space for getting hashtag
 					for(int i=0;i<temp.length;i++) {
 			        	if(temp[i].startsWith("#")) {
 			        		UserHashtag hashTag = new UserHashtag(temp[i],postId);

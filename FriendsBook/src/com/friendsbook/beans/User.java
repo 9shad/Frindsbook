@@ -4,13 +4,8 @@ import java.time.LocalDate;
 
 import com.friendsbook.util.DateAndTime;
 
-public class User {
-	private String userId;
+public class User extends UserFriend{
 	private String password;
-	private String name;
-	private String gender;
-	private String schoolName;
-	private LocalDate birthdayDate;
 	private String email;
 	private String accountCreatedTimeStamp;
 	
@@ -21,53 +16,19 @@ public class User {
 	
 	public User(String userId, String password, String name, String gender,
 			String schoolName, LocalDate birthdayDate, String email) {
-		super();
-		this.userId = userId;
+		super(userId,name,gender,schoolName,birthdayDate);
 		this.password = password;
-		this.name = name;
-		this.gender = gender;
-		this.schoolName = schoolName;
-		this.birthdayDate = birthdayDate;
 		this.email = email;
 		this.accountCreatedTimeStamp = DateAndTime.dateTimeString();
 	}
 	
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-	public String getSchoolName() {
-		return schoolName;
-	}
-	public void setSchoolName(String schoolName) {
-		this.schoolName = schoolName;
-	}
-	public LocalDate getBirthdayDate() {
-		return birthdayDate;
-	}
-	public void setBirthdayDate(LocalDate birthdayDate) {
-		this.birthdayDate = birthdayDate;
-	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -89,15 +50,15 @@ public class User {
 				+ ((accountCreatedTimeStamp == null) ? 0
 						: accountCreatedTimeStamp.hashCode());
 		result = prime * result
-				+ ((birthdayDate == null) ? 0 : birthdayDate.hashCode());
+				+ ((super.getBirthdayDate() == null) ? 0 : super.getBirthdayDate().hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((super.getGender() == null) ? 0 : super.getGender().hashCode());
+		result = prime * result + ((super.getName() == null) ? 0 : getName().hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result
-				+ ((schoolName == null) ? 0 : schoolName.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+				+ ((super.getSchool() == null) ? 0 : super.getSchool().hashCode());
+		result = prime * result + ((super.getUserId() == null) ? 0 : super.getUserId().hashCode());
 		return result;
 	}
 
@@ -115,48 +76,48 @@ public class User {
 		} else if (!accountCreatedTimeStamp
 				.equals(other.accountCreatedTimeStamp))
 			return false;
-		if (birthdayDate == null) {
-			if (other.birthdayDate != null)
+		if (getBirthdayDate() == null) {
+			if (other.getBirthdayDate() != null)
 				return false;
-		} else if (!birthdayDate.equals(other.birthdayDate))
+		} else if (!getBirthdayDate().equals(other.getBirthdayDate()))
 			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (gender == null) {
-			if (other.gender != null)
+		if (getGender() == null) {
+			if (other.getGender() != null)
 				return false;
-		} else if (!gender.equals(other.gender))
+		} else if (!getGender().equals(other.getGender()))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (getName() == null) {
+			if (other.getName() != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!getName().equals(other.getName()))
 			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (schoolName == null) {
-			if (other.schoolName != null)
+		if (getSchool() == null) {
+			if (other.getSchool() != null)
 				return false;
-		} else if (!schoolName.equals(other.schoolName))
+		} else if (!getSchool().equals(other.getSchool()))
 			return false;
-		if (userId == null) {
-			if (other.userId != null)
+		if (getUserId() == null) {
+			if (other.getUserId() != null)
 				return false;
-		} else if (!userId.equals(other.userId))
+		} else if (!getUserId().equals(other.getUserId()))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return this.userId+ " profile information:\nname=" + name + ",\n gender=" + gender + ",\n schoolName="
-				+ schoolName + ",\n birthdayDate=" + birthdayDate;
+		return getUserId()+ " profile information:\nname=" + getName() + ",\n gender=" + getGender() + ",\n schoolName="
+				+ getSchool() + ",\n birthdayDate=" + getBirthdayDate();
 	}
 	
 }

@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.friendsbook.DAO.ShowFriendListDAO;
+import com.friendsbook.DAO.FriendDAO;
 import com.friendsbook.beans.UserFriend;
 
 public class ShowFriendList {
 	private List<String> friendList;
 	
 	public ShowFriendList(String userId) {
-		friendList = ShowFriendListDAO.getFriendList(userId);
+		friendList = FriendDAO.getFriendList(userId);
 	}
 	
 	public void displayFriendList(){
@@ -32,7 +32,8 @@ public class ShowFriendList {
 				System.out.print("Enter your choice to: ");
 				option = sc.nextInt();
 				if(option >=1 && option < this.friendList.size()+1) {
-					UserFriend friendProfile = new UserFriend(friendList.get(option-1));
+					//UserFriend friendProfile = new UserFriend(friendList.get(option-1));
+					UserFriend friendProfile = FriendDAO.getFriendProfile(friendList.get(option-1));
 					System.out.println("------Profile Information-----");
 					System.out.println(friendProfile);
 				}

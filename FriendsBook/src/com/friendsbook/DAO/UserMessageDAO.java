@@ -107,4 +107,45 @@ public class UserMessageDAO {
 		return false;
 	}
 	
+	
+	public static UserMessage getMessages(int notificationId){
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		final String QUERY = "select * from user_message where notification_id = ?";
+		UserMessage message= null;;
+		try {
+			con = Connector.getConnection();
+			ps = con.prepareStatement(QUERY);
+			ps.setInt(1, notificationId);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				message= new UserMessage();
+				message.setId(rs.getInt("id"));
+				message.setFromUser(rs.getString("from_userid"));
+				message.setToUser(rs.getString("to_userid"));
+				message.setMsgDescription(rs.getString("description"));
+				message.setTimeStamp(rs.getTimestamp("timestamp").toLocalDateTime());
+				message.setNotificationId(rs.getInt("notification_id"));
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return message;
+		
+	}
+	
 }
