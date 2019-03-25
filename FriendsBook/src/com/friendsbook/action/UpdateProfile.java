@@ -5,11 +5,12 @@ import java.util.Scanner;
 
 import com.friendsbook.DAO.UpdateProfileDAO;
 import com.friendsbook.beans.User;
+import com.friendsbook.beans.UserFriend;
 
 public class UpdateProfile {
 
-	public String updateProfile(User usr){
-		User user = new User();
+	public String updateProfile(UserFriend usr){
+		UserFriend user = new User();
 		Scanner sc = new Scanner(System.in);
 		StringBuilder description = new StringBuilder();
 		
@@ -18,7 +19,7 @@ public class UpdateProfile {
 			System.out.print("Enter name: ");
 			sc.nextLine(); // to consume the \n character
 			user.setName(sc.nextLine());
-			description.append("User "+usr.getUserId() +" updated name to: "+user.getName()+"\n");
+			description.append("Updated name to: "+user.getName()+".");
 		}
 		System.out.print("Do you wish to update gender? [y:n] : ");
 		if(sc.next().equalsIgnoreCase("y")){
@@ -29,14 +30,14 @@ public class UpdateProfile {
 				System.out.println("Gender updated to male");
 				user.setGender("male");
 			}
-			description.append("User "+usr.getUserId() +" updated gender to : "+user.getGender()+"\n");
+			description.append("Updated gender to : "+user.getGender()+".");
 		}
 		
 		System.out.print("Do you wish to update school? [y:n] : ");
 		if(sc.next().equalsIgnoreCase("y")){
 			System.out.print("Enter school name: ");
 			user.setSchool(sc.next());
-			description.append("User "+usr.getUserId() +" updated school to: " + user.getSchool()+"\n");
+			description.append("Updated school to: " + user.getSchool()+".");
 		}
 		
 		System.out.print("Do you wish to update birthday? [y:n] : ");
@@ -62,7 +63,7 @@ public class UpdateProfile {
 			}
 			//YYYY-MM-DD
 			user.setBirthdayDate(LocalDate.of(year, month, day));
-			description.append("User "+usr.getUserId() +" updated birthdate to: " + user.getBirthdayDate()+"\n");
+			description.append("Updated birthdate to: " + user.getBirthdayDate()+".");
 		}
 		
 		if (user.getName() != null)
@@ -86,7 +87,7 @@ public class UpdateProfile {
 		
 	}
 	
-	private boolean updateProfile(User user, String changeLog){
+	private boolean updateProfile(UserFriend user, String changeLog){
 		return UpdateProfileDAO.updateUserProfileDAO(user, changeLog);
 	}
 	

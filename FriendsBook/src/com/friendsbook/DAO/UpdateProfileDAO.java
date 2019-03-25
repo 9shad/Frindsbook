@@ -3,14 +3,16 @@ package com.friendsbook.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 import com.friendsbook.beans.User;
+import com.friendsbook.beans.UserFriend;
+import com.friendsbook.beans.UserPost;
 import com.friendsbook.datasource.Connector;
 
 public class UpdateProfileDAO {
 
-	public static boolean updateUserProfileDAO(User user, String changeLog){
-		//TODO: update the change log information to user post table for users friend to see the update
+	public static boolean updateUserProfileDAO(UserFriend user, String changeLog){
 		Connection con = null;
 		PreparedStatement ps = null;
 		final String QUERY = "update useraccount set name = ?, gender = ?, school_name = ?, birthday = ? where user_id=?";
@@ -25,8 +27,19 @@ public class UpdateProfileDAO {
 			ps.setDate(4, java.sql.Date.valueOf(user.getBirthdayDate()));
 			ps.setString(5, user.getUserId());
 			if(ps.executeUpdate()==1){
-				con.commit();
-				return true;
+				//create an entry in user_post table once the profile information is updated
+				UserPost post = new UserPost(); 
+				post.setType(UserPost.UPDATE);
+				post.setUserId(user.getUserId());
+				post.setTimeStamp(LocalDateTime.now());
+				post.setDescription(changeLog);
+
+				if(UserPostDAO.createPostDAO(post)) { //check if commit in createpost is needed
+					con.commit();
+					return true;
+				}else {
+					con.rollback();
+				}
 			}
 		} catch (SQLException e) {
 			try {

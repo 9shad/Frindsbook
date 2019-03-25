@@ -6,12 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.friendsbook.beans.User;
+import com.friendsbook.beans.UserFriend;
 import com.friendsbook.datasource.Connector;
 import com.friendsbook.util.EncryptPassword;
 
 public class LoginDAO {
 	
-	public static User checkUserCredentials(String userId, String password){
+	public static UserFriend checkUserCredentials(String userId, String password){
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -23,15 +24,15 @@ public class LoginDAO {
 			ps.setString(2, EncryptPassword.cryptWithMD5(password));
 			rs = ps.executeQuery();
 			if(rs.next()){
-				User user = new User();
+				UserFriend user = new User();
 				user.setUserId(rs.getString("user_id"));
-				user.setPassword(rs.getString("password"));
+				//user.setPassword(rs.getString("password"));
 				user.setName(rs.getString("name"));
 				user.setGender(rs.getString("gender"));
 				user.setSchool(rs.getString("school_name"));
 				user.setBirthdayDate(rs.getDate("birthday").toLocalDate());
-				user.setAccountCreatedTimeStamp(rs.getString("account_created_on"));//change this to timestame from string later
-				user.setEmail(rs.getString("email"));
+				//user.setAccountCreatedTimeStamp(rs.getString("account_created_on"));//change this to timestame from string later
+				//user.setEmail(rs.getString("email"));
 				return user;
 			}
 		} catch (SQLException e) {

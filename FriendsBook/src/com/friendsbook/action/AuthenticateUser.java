@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.friendsbook.DAO.LoginDAO;
 import com.friendsbook.beans.User;
+import com.friendsbook.beans.UserFriend;
 
 public class AuthenticateUser {
 
@@ -21,7 +22,7 @@ public class AuthenticateUser {
 			password = sc.next();
 		}
 		
-		User user = this.login(userId, password);
+		UserFriend user = this.login(userId, password);
 		if(user != null){
 			AuthorizedUser au = new AuthorizedUser();
 			au.provideAccess(user);
@@ -31,7 +32,7 @@ public class AuthenticateUser {
 		
 	}
 	
-	private User login(String userId, String password){
+	private UserFriend login(String userId, String password){
 		return LoginDAO.checkUserCredentials(userId, password);
 	}
 	

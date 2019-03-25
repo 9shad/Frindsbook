@@ -31,7 +31,6 @@ public class UserPostDAO {
 			ps.setString(2, post.getUserId());
 			ps.setString(3, post.getDescription());
 			ps.setTimestamp(4, Timestamp.valueOf(post.getTimeStamp()));
-			//ps.setInt(5, post.getPostCount());
 			
 			if(ps.executeUpdate() == 1){
 				
@@ -39,23 +38,24 @@ public class UserPostDAO {
 				if (rs.next()) {
 			        postId = rs.getInt(1);
 			    }
-				if(postId != -1 && post.getDescription().contains("#")){
-					String[] temp = post.getDescription().split(" "); //we can also use subsring to get index of # and next space for getting hashtag
+				//postId != -1 see if it needs to be checked
+				if(post.getDescription().contains("#")){
+					String[] temp = post.getDescription().split(" "); //we can also use subsrting to get index of # and next space for getting hashtag
 					for(int i=0;i<temp.length;i++) {
 			        	if(temp[i].startsWith("#")) {
 			        		UserHashtag hashTag = new UserHashtag(temp[i],postId);
 			        		tags.add(hashTag);
 			        	}
 			        }
-					if(tags.size() == 0) {
-						con.commit();
-						return true;
-					}else if(HashTagDAO.createHashTagDAO(tags)) {
+					if(tags.size() == 0 || HashTagDAO.createHashTagDAO(tags)) {
 			        	con.commit();
 				    	return true;
 			        }else {
 			        	con.rollback();
 			        }
+				}else {
+					con.commit();
+			    	return true;
 				}
 			}
 		} catch (SQLException e) {
@@ -82,8 +82,8 @@ public class UserPostDAO {
 		List<UserPost> posts = null;
 		//can also use dense_rank() instead of writing two queries. but this function is supported for mysql verson above 8
 		final String QUERY = "select * from user_post "
-				+ "where post_type = ? AND user_id IN (select from_userid from friend_request where to_userid = ? and status=? )"
-				+ "OR user_id IN (select to_userid from friend_request where from_userid = ? and status=? ) order by timestamp desc limit 3";
+				+ "where post_type = ? AND (user_id IN (select from_userid from friend_request where to_userid = ? and status=? )"
+				+ " OR user_id IN (select to_userid from friend_request where from_userid = ? and status=? )) order by timestamp desc limit 3";
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;

@@ -3,7 +3,7 @@ package com.friendsbook.action;
 import java.util.Scanner;
 
 import com.friendsbook.DAO.UserInformationDAO;
-import com.friendsbook.beans.User;
+import com.friendsbook.beans.UserFriend;
 import com.friendsbook.beans.UserInformation;
 
 public class AuthorizedUser {
@@ -25,11 +25,12 @@ public class AuthorizedUser {
 		System.out.print("Please Enter your choice: ");
 	}
 	
-	public void provideAccess(User user){
+	public void provideAccess(UserFriend user){
 		Scanner sc = new Scanner(System.in);
 		int optionSelected = 0;			
 		UserInformation userInfo = UserInformationDAO.initialize(user);
-		
+		CreatePost createPost = new CreatePost();
+		createPost.showMostRecentPostMenu(userInfo.getPostsForUser());
 		do{
 
 			showApplicationFeatures(user.getName(), userInfo.getNotificationsForUser().size());
@@ -37,13 +38,13 @@ public class AuthorizedUser {
 			
 			switch(optionSelected){
 			case 1:
+				//createPost.showMostRecentPostMenu(userInfo.getPostsForUser());
 				break;
 			case 2:
 				Notification notification = new Notification();
 				notification.displayNotifications(userInfo, user.getUserId());
 				break;
 			case 3:
-				CreatePost createPost = new CreatePost();
 				createPost.createPost(user.getUserId());
 				break;
 			case 4:
@@ -54,6 +55,7 @@ public class AuthorizedUser {
 			case 5:
 				UpdateProfile updateProfile = new UpdateProfile();
 				System.out.println(updateProfile.updateProfile(user));
+				userInfo.setUser(user);
 				break;
 			case 6:
 				SendMessage sendMessage = new SendMessage();

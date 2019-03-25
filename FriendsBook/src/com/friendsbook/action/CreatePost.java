@@ -1,7 +1,9 @@
 package com.friendsbook.action;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.friendsbook.DAO.UserPostDAO;
 import com.friendsbook.beans.UserPost;
@@ -28,6 +30,18 @@ public class CreatePost {
 
 	private boolean createPost(UserPost post){
 		return UserPostDAO.createPostDAO(post);
+	}
+	
+	
+	public void showMostRecentPostMenu(List<UserPost> posts) {		
+		AtomicInteger index = new AtomicInteger(1);
+		System.out.println();
+		System.out.println("---- Most Recent Post ----");
+		posts.forEach(p -> { 
+			System.out.println(index.getAndIncrement() +". ["+p.getUserId()+"]: "+p.getDescription());
+			p.getUserComments().forEach(c->{System.out.println("\t["+c.getUserId()+"]: "+c);});
+		});
+
 	}
 	
 }

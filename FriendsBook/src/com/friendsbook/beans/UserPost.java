@@ -1,9 +1,9 @@
 package com.friendsbook.beans;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.friendsbook.DAO.UserPostDAO;
 
 public class UserPost {
 	public static final String POST = "post";
@@ -20,6 +20,7 @@ public class UserPost {
 	
 	public UserPost() {
 		super();
+		userComments = new ArrayList<>();
 		//counter = UserPostDAO.getMaxPostCountNumber();
 		//this.postCount = ++counter;
 	}
