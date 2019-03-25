@@ -1,29 +1,27 @@
 package com.friendsbook.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserInformation{
 
-	private User user;
+	private UserFriend user;
 	private List<UserPost> postsForUser;
-	private List<UserFriend> userFriendList;
-	private List<UserFriendRequest> friendRequestForUser;
+	private List<String> userFriendList;
 	private List<UserNotification> notificationsForUser;
-	private List<UserMessage> messagesForUser;
 	
-	public UserInformation(User user) {
+	public UserInformation(UserFriend user) {
 		super();
 		this.user = user;
-		
-		/**
-		 * TODO: Create DAO to intitailze user information from system as soon as user logged in
-		 */
+		postsForUser = new ArrayList<>();
+		userFriendList = new ArrayList<>();
+		notificationsForUser = new ArrayList<>();
 	}
 	
-	public User getUser() {
+	public UserFriend getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(UserFriend user) {
 		this.user = user;
 	}
 
@@ -35,20 +33,12 @@ public class UserInformation{
 		this.postsForUser = postsForUser;
 	}
 
-	public List<UserFriend> getUserFriendList() {
+	public List<String> getUserFriendList() {
 		return userFriendList;
 	}
 
-	public void setUserFriendList(List<UserFriend> userFriendList) {
+	public void setUserFriendList(List<String> userFriendList) {
 		this.userFriendList = userFriendList;
-	}
-
-	public List<UserFriendRequest> getFriendRequestForUser() {
-		return friendRequestForUser;
-	}
-
-	public void setFriendRequestForUser(List<UserFriendRequest> friendRequestForUser) {
-		this.friendRequestForUser = friendRequestForUser;
 	}
 
 	public List<UserNotification> getNotificationsForUser() {
@@ -57,14 +47,6 @@ public class UserInformation{
 
 	public void setNotificationsForUser(List<UserNotification> notificationsForUser) {
 		this.notificationsForUser = notificationsForUser;
-	}
-
-	public List<UserMessage> getMessagesForUser() {
-		return messagesForUser;
-	}
-
-	public void setMessagesForUser(List<UserMessage> messagesForUser) {
-		this.messagesForUser = messagesForUser;
 	}
 
 }

@@ -21,7 +21,7 @@ public class UpdateProfileDAO {
 			ps = con.prepareStatement(QUERY);
 			ps.setString(1, user.getName());
 			ps.setString(2, user.getGender());
-			ps.setString(3, user.getSchoolName());
+			ps.setString(3, user.getSchool());
 			ps.setDate(4, java.sql.Date.valueOf(user.getBirthdayDate()));
 			ps.setString(5, user.getUserId());
 			if(ps.executeUpdate()==1){
@@ -32,7 +32,6 @@ public class UpdateProfileDAO {
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			e.printStackTrace();

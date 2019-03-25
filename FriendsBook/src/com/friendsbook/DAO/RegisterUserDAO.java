@@ -22,7 +22,7 @@ public class RegisterUserDAO {
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getName());
 			ps.setString(4, user.getGender());
-			ps.setString(5, user.getSchoolName());
+			ps.setString(5, user.getSchool());
 			ps.setDate(6, java.sql.Date.valueOf(user.getBirthdayDate()));
 			ps.setString(7, user.getEmail());
 			ps.setString(8, user.getAccountCreatedTimeStamp());
@@ -34,11 +34,9 @@ public class RegisterUserDAO {
 				con.rollback();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
@@ -47,7 +45,6 @@ public class RegisterUserDAO {
 				ps.close();
 				//con.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -76,7 +73,6 @@ public class RegisterUserDAO {
 				ps.close();
 				//con.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

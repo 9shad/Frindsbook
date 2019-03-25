@@ -35,8 +35,8 @@ public class UpdateProfile {
 		System.out.print("Do you wish to update school? [y:n] : ");
 		if(sc.next().equalsIgnoreCase("y")){
 			System.out.print("Enter school name: ");
-			user.setSchoolName(sc.next());
-			description.append("User "+usr.getUserId() +" updated school to: " + user.getSchoolName()+"\n");
+			user.setSchool(sc.next());
+			description.append("User "+usr.getUserId() +" updated school to: " + user.getSchool()+"\n");
 		}
 		
 		System.out.print("Do you wish to update birthday? [y:n] : ");
@@ -69,8 +69,8 @@ public class UpdateProfile {
 			usr.setName(user.getName());
 		if(user.getGender() != null)
 			usr.setGender(user.getGender());
-		if(user.getSchoolName() != null)
-			usr.setSchoolName(user.getSchoolName());
+		if(user.getSchool() != null)
+			usr.setSchool(user.getSchool());
 		if(user.getBirthdayDate() != null)
 			usr.setBirthdayDate(user.getBirthdayDate());
 		

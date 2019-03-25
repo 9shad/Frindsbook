@@ -28,14 +28,13 @@ public class LoginDAO {
 				user.setPassword(rs.getString("password"));
 				user.setName(rs.getString("name"));
 				user.setGender(rs.getString("gender"));
-				user.setSchoolName(rs.getString("school_name"));
+				user.setSchool(rs.getString("school_name"));
 				user.setBirthdayDate(rs.getDate("birthday").toLocalDate());
 				user.setAccountCreatedTimeStamp(rs.getString("account_created_on"));//change this to timestame from string later
 				user.setEmail(rs.getString("email"));
 				return user;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			try {

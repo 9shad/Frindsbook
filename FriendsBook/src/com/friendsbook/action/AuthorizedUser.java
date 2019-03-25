@@ -2,18 +2,19 @@ package com.friendsbook.action;
 
 import java.util.Scanner;
 
+import com.friendsbook.DAO.UserInformationDAO;
 import com.friendsbook.beans.User;
 import com.friendsbook.beans.UserInformation;
 
 public class AuthorizedUser {
 	
-	private void showApplicationFeatures(String userName){
+	private void showApplicationFeatures(String userName, int notificationCount){
 		System.out.println();
 		System.out.println("######################################");
 		System.out.println("\tWelcome back "+ userName +"!!");
 		System.out.println("######################################");
 		//System.out.println("1. Select an update and post");
-		//System.out.println("2. Check Notifications");
+		System.out.println("2. Check Notifications ("+notificationCount+" new)");
 		System.out.println("3. Create a new post");
 		System.out.println("4. View Friends List");
 		System.out.println("5. Update Profile");
@@ -26,30 +27,28 @@ public class AuthorizedUser {
 	
 	public void provideAccess(User user){
 		Scanner sc = new Scanner(System.in);
-		int optionSelected = 0;
-		boolean userInitilized = false;
+		int optionSelected = 0;			
+		UserInformation userInfo = UserInformationDAO.initialize(user);
+		
 		do{
-			showApplicationFeatures(user.getName());
 
+			showApplicationFeatures(user.getName(), userInfo.getNotificationsForUser().size());
 			optionSelected = sc.nextInt();
-
-			if(optionSelected != 9 && !userInitilized){
-				//TODO: fetch all user related information when userInformation object is created
-				UserInformation userInfo = new UserInformation(user);
-				userInitilized = true;
-			}
 			
 			switch(optionSelected){
 			case 1:
 				break;
 			case 2:
+				Notification notification = new Notification();
+				notification.displayNotifications(userInfo, user.getUserId());
 				break;
 			case 3:
 				CreatePost createPost = new CreatePost();
 				createPost.createPost(user.getUserId());
 				break;
 			case 4:
-				ShowFriendList showList = new ShowFriendList(user.getUserId());
+				//ShowFriendList showList = new ShowFriendList(user.getUserId());
+				ShowFriendList showList = new ShowFriendList(userInfo.getUserFriendList());
 				showList.displayFriendsAndProfile();
 				break;
 			case 5:
@@ -70,11 +69,11 @@ public class AuthorizedUser {
 				break;
 			case 9:
 				user = null;
+				userInfo = null;
 				break;
 			default:
 				break;
 			}		
 		}while(optionSelected !=9);
-		
 	}
 }

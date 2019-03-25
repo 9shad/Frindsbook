@@ -14,6 +14,10 @@ public class ShowFriendList {
 		friendList = FriendDAO.getFriendList(userId);
 	}
 	
+	public ShowFriendList(List<String> friendList) {
+		this.friendList = friendList;
+	}
+	
 	public void displayFriendList(){
 		if(this.friendList != null && !this.friendList.isEmpty()) {
 			AtomicInteger counter = new AtomicInteger(0);

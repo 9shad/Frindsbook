@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.friendsbook.beans.UserFriendRequest;
 import com.friendsbook.beans.UserHashtag;
 import com.friendsbook.beans.UserPost;
 import com.friendsbook.datasource.Connector;
@@ -73,27 +74,79 @@ public class UserPostDAO {
 			}
 		}
 		return false;
-	}
-
-	/*public static int getMaxPostCountNumber(){
+	}	
+	
+	
+	
+	public static List<UserPost> getNewPosts(String userId){
+		List<UserPost> posts = null;
+		//can also use dense_rank() instead of writing two queries. but this function is supported for mysql verson above 8
+		final String QUERY = "select * from user_post "
+				+ "where post_type = ? AND user_id IN (select from_userid from friend_request where to_userid = ? and status=? )"
+				+ "OR user_id IN (select to_userid from friend_request where from_userid = ? and status=? ) order by timestamp desc limit 3";
 		Connection con = null;
-		Statement s = null;
-		ResultSet rs;
-		final String QUERY = "select max(post_number) from post";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		
 		try {
-			con = Connector.getConnection();
-			s = con.createStatement();
+			posts = new ArrayList<UserPost>();
+			ps = Connector.getConnection().prepareStatement(QUERY);
+			ps.setString(1, UserPost.POST);
+			ps.setString(2, userId);
+			ps.setString(3, UserFriendRequest.ACCEPTED);
+			ps.setString(4, userId);
+			ps.setString(5, UserFriendRequest.ACCEPTED);
+			rs = ps.executeQuery();
 			
-			rs = s.executeQuery(QUERY);
-			
-			if(rs.next()){
-				return rs.getInt(1);
+			while(rs.next()) {
+				UserPost post = new UserPost();
+				
+				post.setPostId(rs.getInt("id"));
+				post.setType(UserPost.POST);
+				post.setUserId(rs.getString("user_id"));
+				post.setDescription(rs.getString("description"));
+				//TODO: also load related comments for this post
+				
+				posts.add(post);				
 			}
 			
+			ps.close();
+			rs.close();
+			
+			ps = Connector.getConnection().prepareStatement(QUERY);
+			ps.setString(1, UserPost.UPDATE);
+			ps.setString(2, userId);
+			ps.setString(3, UserFriendRequest.ACCEPTED);
+			ps.setString(4, userId);
+			ps.setString(5, UserFriendRequest.ACCEPTED);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				UserPost post = new UserPost();
+				
+				post.setPostId(rs.getInt("id"));
+				post.setType(UserPost.UPDATE);
+				post.setUserId(rs.getString("user_id"));
+				post.setDescription(rs.getString("description"));
+				//TODO: also load related comments for this post
+				
+				posts.add(post);				
+			}
+			
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		return 0;
-	}*/
+		
+		return posts;
+	}
 }

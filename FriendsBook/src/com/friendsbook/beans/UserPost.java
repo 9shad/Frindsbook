@@ -24,14 +24,14 @@ public class UserPost {
 		//this.postCount = ++counter;
 	}
 	
-	public UserPost(int postId){
-		//TODO: write code to initialize single post
-		//TODO: initialize respective comments
-	}
-	
 	public int getPostId() {
 		return postId;
 	}
+	
+	public void setPostId(int postId) {
+		this.postId = postId;
+	}
+
 	public String getType() {
 		return type;
 	}

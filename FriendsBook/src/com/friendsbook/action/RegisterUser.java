@@ -46,7 +46,7 @@ public class RegisterUser {
 		}
 		
 		System.out.print("Enter your School Name: ");
-		user.setSchoolName(sc.next());
+		user.setSchool(sc.next());
 		
 		System.out.println("Enter your birth information");
 		System.out.print("Enter month: (1 to 12): ");
