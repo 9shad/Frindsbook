@@ -5,6 +5,8 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.friendsbook.DAO.HashTagDAO;
+import com.friendsbook.DAO.UserPostDAO;
+import com.friendsbook.beans.UserPost;
 
 public class Hashtag {
 	
@@ -13,20 +15,34 @@ public class Hashtag {
 	}
 	
 	public void showHashtags() {
-		AtomicInteger index = new AtomicInteger(1);
-		System.out.println();
-		System.out.println("----Top three trending hashtag----");
-		getMostTrendingHashTags().forEach(obj -> {System.out.println(index.getAndIncrement() +". "+obj);});
-		
+		System.out.println("\n----Top three trending hashtag----");
+		getMostTrendingHashTags().forEach(obj -> {System.out.println("-> "+obj);});
+	}
+	
+	
+	public void showHashtags(String userId) {
 		Scanner sc = new Scanner(System.in);
+		
+		this.showHashtags();
 		System.out.print("Enter a hashtag to display related posts: ");
 		String input = sc.next();
 		if(input!=null && input.charAt(0)!='#'){
 			input = "#" + input;
 		}
 		
-		//TODO: display related posts 
+		List<UserPost> posts = UserPostDAO.getPostsContainingHashtag(userId, input);
 		
+		if(posts != null && posts.size() >0) {
+			System.out.println("\n----- Posts with hashtag "+input+" from friends -----");
+			posts.forEach(p -> { 
+				System.out.println(p);
+				//System.out.println("-> ["+p.getUserId()+"]: "+p.getDescription());
+				//p.getUserComments().forEach(c->{System.out.println(c);});
+			});
+		}else {
+			System.out.println("\nOops! could not find any post from your friends with hashtag "+input);
+		}
+
 	}
 	
 }

@@ -53,3 +53,10 @@ CREATE TABLE `user_hashtag` (
  `post_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
+CREATE TABLE `user_comment` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `postId` int(11) NOT NULL,
+ `from_UserId` varchar(12) NOT NULL,
+ `description` varchar(255) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

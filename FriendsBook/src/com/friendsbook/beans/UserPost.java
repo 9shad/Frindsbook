@@ -15,14 +15,11 @@ public class UserPost {
 	private String userId;
 	private String description;
 	private LocalDateTime timeStamp;
-	//private int postCount;
 	private List<UserComment> userComments;
 	
 	public UserPost() {
 		super();
 		userComments = new ArrayList<>();
-		//counter = UserPostDAO.getMaxPostCountNumber();
-		//this.postCount = ++counter;
 	}
 	
 	public int getPostId() {
@@ -60,17 +57,21 @@ public class UserPost {
 	public void setTimeStamp(LocalDateTime timeStamp) {
 		this.timeStamp = timeStamp;
 	}
-	//public int getPostCount() {
-		//return postCount;
-	//}
+
 	public List<UserComment> getUserComments() {
 		return userComments;
+	}
+	
+	public void setUserComments(List<UserComment> userComments) {
+		this.userComments = userComments;
 	}
 
 	@Override
 	public String toString() {
-		return "[ " + timeStamp +", "+ description + "\n" +
-				userComments.stream() + "]";
+		StringBuilder output = new StringBuilder("-> ["+this.getUserId()+" posted]: "+this.getDescription());
+		for(UserComment c : this.getUserComments())
+			output.append("\n"+c);
+		return output.toString();
 	}
 
 	

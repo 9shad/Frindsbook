@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.friendsbook.beans.UserComment;
 import com.friendsbook.beans.UserFriendRequest;
 import com.friendsbook.beans.UserHashtag;
 import com.friendsbook.beans.UserPost;
@@ -106,7 +107,11 @@ public class UserPostDAO {
 				post.setType(UserPost.POST);
 				post.setUserId(rs.getString("user_id"));
 				post.setDescription(rs.getString("description"));
-				//TODO: also load related comments for this post
+				
+				List<UserComment> comments = UserCommentDAO.getCommentsDAO(rs.getInt("id"));
+				if(comments != null && !comments.isEmpty()) {
+					post.setUserComments(comments);
+				}
 				
 				posts.add(post);				
 			}
@@ -129,7 +134,11 @@ public class UserPostDAO {
 				post.setType(UserPost.UPDATE);
 				post.setUserId(rs.getString("user_id"));
 				post.setDescription(rs.getString("description"));
-				//TODO: also load related comments for this post
+				
+				List<UserComment> comments = UserCommentDAO.getCommentsDAO(rs.getInt("id"));
+				if(comments != null && !comments.isEmpty()) {
+					post.setUserComments(comments);
+				}
 				
 				posts.add(post);				
 			}
@@ -143,6 +152,57 @@ public class UserPostDAO {
 				ps.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return posts;
+	}
+	
+	
+	public static List<UserPost> getPostsContainingHashtag(String userId, String hashtag){
+		List<UserPost> posts = null;
+		final String QUERY = "select * from user_post "
+				+ "where post_type = ? AND (user_id IN (select from_userid from friend_request where to_userid = ? and status=? )"
+				+ " OR user_id IN (select to_userid from friend_request where from_userid = ? and status=? )) AND description LIKE ?";
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			posts = new ArrayList<UserPost>();
+			ps = Connector.getConnection().prepareStatement(QUERY);
+			ps.setString(1, UserPost.POST);
+			ps.setString(2, userId);
+			ps.setString(3, UserFriendRequest.ACCEPTED);
+			ps.setString(4, userId);
+			ps.setString(5, UserFriendRequest.ACCEPTED);
+			ps.setString(6, "%"+hashtag+"%");
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				UserPost post = new UserPost();
+				
+				post.setPostId(rs.getInt("id"));
+				post.setType(UserPost.POST);
+				post.setUserId(rs.getString("user_id"));
+				post.setDescription(rs.getString("description"));
+				
+				List<UserComment> comments = UserCommentDAO.getCommentsDAO(rs.getInt("id"));
+				if(comments != null && !comments.isEmpty()) {
+					post.setUserComments(comments);
+				}
+				
+				posts.add(post);				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				ps.close();
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}

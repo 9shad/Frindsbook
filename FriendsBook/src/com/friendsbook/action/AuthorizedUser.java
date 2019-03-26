@@ -13,7 +13,7 @@ public class AuthorizedUser {
 		System.out.println("######################################");
 		System.out.println("\tWelcome back "+ userName +"!!");
 		System.out.println("######################################");
-		//System.out.println("1. Select an update and post");
+		System.out.println("1. Select an update and post");
 		System.out.println("2. Check Notifications ("+notificationCount+" new)");
 		System.out.println("3. Create a new post");
 		System.out.println("4. View Friends List");
@@ -38,7 +38,7 @@ public class AuthorizedUser {
 			
 			switch(optionSelected){
 			case 1:
-				//createPost.showMostRecentPostMenu(userInfo.getPostsForUser());
+				createPost.showMostRecentPost(userInfo.getPostsForUser(),user.getUserId());
 				break;
 			case 2:
 				Notification notification = new Notification();
@@ -48,8 +48,8 @@ public class AuthorizedUser {
 				createPost.createPost(user.getUserId());
 				break;
 			case 4:
-				//ShowFriendList showList = new ShowFriendList(user.getUserId());
-				ShowFriendList showList = new ShowFriendList(userInfo.getUserFriendList());
+				ShowFriendList showList = new ShowFriendList(user.getUserId());
+				//ShowFriendList showList = new ShowFriendList(userInfo.getUserFriendList()); to use this we need to add newly accepted friend request to this arraylist
 				showList.displayFriendsAndProfile();
 				break;
 			case 5:
@@ -67,7 +67,7 @@ public class AuthorizedUser {
 				break;
 			case 8:
 				Hashtag hashTag = new Hashtag();
-				hashTag.showHashtags();
+				hashTag.showHashtags(user.getUserId());
 				break;
 			case 9:
 				user = null;

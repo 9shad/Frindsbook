@@ -82,7 +82,7 @@ public class UpdateProfile {
 				return "Oops!! Profile Not updated, please try again";
 			}
 		}else{
-			return null;
+			return "Oops!! Profile Not updated, please try again";
 		}
 		
 	}

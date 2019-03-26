@@ -1,7 +1,5 @@
 package com.friendsbook.beans;
 
-import javax.naming.SizeLimitExceededException;
-
 public class UserComment {
 	private int commentId;
 	private int postId;
@@ -9,12 +7,6 @@ public class UserComment {
 	private String description;
 	
 	public UserComment(){}
-	
-	public UserComment(int commentId) {
-		super();
-		this.commentId = commentId;
-		//TODO: write code to initialize object based on comment Id
-	}
 	
 	public int getPostId() {
 		return postId;
@@ -31,7 +23,7 @@ public class UserComment {
 	public String getDescription() {
 		return description;
 	}
-	public void setDescription(String description) throws SizeLimitExceededException {
+	public void setDescription(String description) {
 		if(description.length() <= 20)
 			this.description = description;
 		else
@@ -42,10 +34,14 @@ public class UserComment {
 		return commentId;
 	}
 
+	public void setCommentId(int commentId) {
+		this.commentId = commentId;
+	}
+
 	@Override
 	public String toString() {
 		//return "UserComment [description=" + description + "]";
-		return "\t" +"[ "+ userId +": "+ description +" ]\n";
+		return "\t" +"->["+ userId +" commented]: "+ description;
 	}
 	
 	
