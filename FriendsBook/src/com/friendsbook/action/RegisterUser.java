@@ -1,7 +1,9 @@
 package com.friendsbook.action;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
-import java.util.Scanner;
 
 import com.friendsbook.DAO.RegisterUserDAO;
 import com.friendsbook.beans.User;
@@ -10,75 +12,80 @@ import com.friendsbook.util.EncryptPassword;
 public class RegisterUser {
 	
 	public String registerUser(){
-		Scanner sc = new Scanner(System.in);
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
 		User user = new User();
 		String result = null;
 		
 		System.out.println();
-		System.out.print("Enter User Id: ");
-		user.setUserId(sc.next());
-		result = this.validateUserId(user.getUserId());
-		if(result != null){
-			return result;
-		}
-		System.out.print("Enter password: ");
-		user.setPassword(sc.next());
-		result = this.checkPasswordString(user.getUserId(), user.getPassword());
-		if(result!=null){
-			return result;
-		}
-		user.setPassword(EncryptPassword.cryptWithMD5(user.getPassword()));
-		
-		System.out.print("Enter your name: ");
-		sc.nextLine();
-		user.setName(sc.nextLine());
-		
-		System.out.print("Select your gender: 1. Male, 2.Female :");
-		switch(sc.nextInt()){
-		case 1:
-			user.setGender("male");
-			break;
-		case 2:
-			user.setGender("female");
-			break;
-		default:
-			return "Invalid Option selected for gender";
-		}
-		
-		System.out.print("Enter your School Name: ");
-		user.setSchool(sc.next());
-		
-		System.out.println("Enter your birth information");
-		System.out.print("Enter month: (1 to 12): ");
-		int month = sc.nextInt();
-		if(month <1 || month >12){
-			return "Invalid month!";
-		}
-		System.out.print("Enter day: (1 to 31): ");
-		int day = sc.nextInt();
-		if(day <1 && day>31){
-			return "Invalid Day!";
-		}else if(month ==2 && day > 28){
-			return "Invalid Day!";
-		}
-		System.out.print("Enter year: (YYYY): ");
-		int year = sc.nextInt();
-		if(year > LocalDate.now().getYear()){
-			return "Invalid year";
-		}else if(year ==  LocalDate.now().getYear() && month > LocalDate.now().getMonthValue()){
-			return "Invalid year";
-		}
-		//YYYY-MM-dd
-		user.setBirthdayDate(LocalDate.of(year, month, day));
-		
-		System.out.print("Enter your email: ");
-		user.setEmail(sc.next());
-		
-		if(this.registerUser(user)){
-			return "\nYou are successfully registered";
-		}else{
-			return "\nOops!! something went wrong, please try again!";
-		}
+		try {
+			System.out.print("Enter User Id: ");
+			user.setUserId(br.readLine());
+			result = this.validateUserId(user.getUserId());
+			if(result != null){
+				return result;
+			}
+			System.out.print("Enter password: ");
+			user.setPassword(br.readLine());
+			result = this.checkPasswordString(user.getUserId(), user.getPassword());
+			if(result!=null){
+				return result;
+			}
+			user.setPassword(EncryptPassword.cryptWithMD5(user.getPassword()));
+			
+			System.out.print("Enter your name: ");
+			user.setName(br.readLine());
+			
+			System.out.print("Select your gender: 1. Male, 2.Female :");
+			switch(Integer.parseInt(br.readLine())){
+			case 1:
+				user.setGender("male");
+				break;
+			case 2:
+				user.setGender("female");
+				break;
+			default:
+				return "Invalid Option selected for gender";
+			}
+			
+			System.out.print("Enter your School Name: ");
+			user.setSchool(br.readLine());
+			
+			System.out.println("Enter your birth information");
+			System.out.print("Enter month: (1 to 12): ");
+			int month = Integer.parseInt(br.readLine());
+			if(month <1 || month >12){
+				return "Invalid month!";
+			}
+			System.out.print("Enter day: (1 to 31): ");
+			int day = Integer.parseInt(br.readLine());
+			if(day <1 && day>31){
+				return "Invalid Day!";
+			}else if(month ==2 && day > 28){
+				return "Invalid Day!";
+			}
+			System.out.print("Enter year: (YYYY): ");
+			int year = Integer.parseInt(br.readLine());
+			if(year > LocalDate.now().getYear()){
+				return "Invalid year";
+			}else if(year ==  LocalDate.now().getYear() && month > LocalDate.now().getMonthValue()){
+				return "Invalid year";
+			}
+			//YYYY-MM-dd
+			user.setBirthdayDate(LocalDate.of(year, month, day));
+			
+			System.out.print("Enter your email: ");
+			user.setEmail(br.readLine());
+			
+			if(this.registerUser(user)){
+				return "\nYou are successfully registered";
+			}else{
+				return "\nOops!! something went wrong, please try again!";
+			}
+			
+		}catch(IOException ioe){
+			return ioe.getMessage();
+		}		
 	}
 	
 	

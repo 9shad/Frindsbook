@@ -42,6 +42,8 @@ public class ShowFriendList {
 					System.out.println(friendProfile);
 				}
 			}while(option <= this.friendList.size());
+		}else {
+			System.out.println("\n---- Looks like you are new to Friends book, Try to send friend request first! ----");
 		}
 	}
 

@@ -1,5 +1,6 @@
 package com.friendsbook;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import sun.text.normalizer.ICUBinary.Authenticate;
@@ -26,7 +27,11 @@ public class FriendsBookMainClass {
 		int inputOption = 0;
 		do{
 			obj.showAuthenticationOption();
-			inputOption = sc.nextInt();
+			try {
+				inputOption = sc.nextInt();
+			}catch(InputMismatchException ime) {
+				continue;
+			}
 			switch(inputOption){
 			case 1:
 				new AuthenticateUser().login();

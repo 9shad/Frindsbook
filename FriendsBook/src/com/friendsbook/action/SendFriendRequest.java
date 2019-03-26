@@ -18,12 +18,12 @@ public class SendFriendRequest {
 			obj.setFromUserId(userId);
 			obj.setToUserId(toUserId);		
 			if(FriendDAO.sendFriendRequestDAO(obj)){
-				System.out.println("Friend Request sent successfully!");
+				System.out.println("\n---- Friend Request sent successfully! ----");
 			}else{
-				System.out.println("Oops! something went wrong, Please try again!!");
+				System.out.println("\nOops! something went wrong, Please try again!!");
 			}
 		}else{
-			System.out.println("Oops!, Invalid User Id. Please try again.");
+			System.out.println("\nOops!, Invalid User Id. Please try again.");
 		}
 	}
 }

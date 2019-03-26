@@ -1,5 +1,6 @@
 package com.friendsbook.action;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.friendsbook.DAO.UserInformationDAO;
@@ -34,7 +35,11 @@ public class AuthorizedUser {
 		do{
 
 			showApplicationFeatures(user.getName(), userInfo.getNotificationsForUser().size());
-			optionSelected = sc.nextInt();
+			try {
+				optionSelected = sc.nextInt();
+			}catch(InputMismatchException ime) {
+				continue;
+			}
 			
 			switch(optionSelected){
 			case 1:

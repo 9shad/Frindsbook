@@ -26,9 +26,9 @@ public class CreatePost {
 		post.setDescription(sc.nextLine());
 		
 		if(createPost(post)){
-			System.out.println("Post created successfully!");
+			System.out.println("\n---- Post created successfully! ----");
 		}else{
-			System.out.println("Oops! something went wrong, please try again.");
+			System.out.println("\nOops! something went wrong, please try again.");
 		}
 	}
 
@@ -43,7 +43,7 @@ public class CreatePost {
 			System.out.println();
 			System.out.println("---- Most Recent Post from your friends ----");
 			posts.forEach(p -> { 
-				System.out.println(p);
+				System.out.println(index.getAndIncrement() +". "+p);
 				//System.out.println(index.getAndIncrement() +". ["+p.getUserId()+"]: "+p.getDescription());
 				//p.getUserComments().forEach(c->{System.out.println(c);});
 			});
@@ -75,13 +75,9 @@ public class CreatePost {
 				
 			}while(input > 0 && input < posts.size()+1);
 			
+		}else {
+			System.out.println("\n----No posts to display at the moment----");
 		}
-		
-		
-		
-		
-		
-		
 	}
 	
 }

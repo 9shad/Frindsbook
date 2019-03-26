@@ -36,6 +36,8 @@ public class SendMessage {
 				
 			}while(option <= friendsList.size());
 			
+		}else {
+			System.out.println("\n---- Looks like you are new to friends book, please try to send friend request first!! ----");
 		}
 	}
 	

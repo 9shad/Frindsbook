@@ -68,7 +68,7 @@ public class UserPost {
 
 	@Override
 	public String toString() {
-		StringBuilder output = new StringBuilder("-> ["+this.getUserId()+" posted]: "+this.getDescription());
+		StringBuilder output = new StringBuilder("["+this.getUserId()+" posted]: "+this.getDescription());
 		for(UserComment c : this.getUserComments())
 			output.append("\n"+c);
 		return output.toString();

@@ -18,6 +18,11 @@ public class Notification {
 	
 	public void displayNotifications(UserInformation userInfo, String UserId) {
 		
+		if(userInfo.getNotificationsForUser() == null || userInfo.getNotificationsForUser().isEmpty()) {
+			System.out.println("\n---- No new notification ----");
+			return;
+		}
+		
 		int input;
 		Scanner sc = new Scanner(System.in);
 		do {
@@ -32,17 +37,17 @@ public class Notification {
 					UserFriendRequest friendRequest = ((FriendNotification) notification).getFriendRequests();
 					if(processFriendRequest(notification.getId(), friendRequest.getFromUserId())) {
 						userInfo.getNotificationsForUser().remove(input-1);
-						System.out.println("Friend request accepted successfully!!");
+						System.out.println("\n---- Friend request accepted successfully!! ----");
 					}else {
-						System.out.println("Unable to process this request at this moment, please try again later");
+						System.out.println("\nUnable to process this request at this moment, please try again later");
 					}
 				}else if(notification instanceof MessageNotification) {
 					UserMessage message = ((MessageNotification) notification).getUserMessage();
 					if(processMessageRequest(notification.getId(),message)) {
 						userInfo.getNotificationsForUser().remove(input-1);
-						System.out.println("Message sent successfully!!");
+						System.out.println("\n---- Message sent successfully!! ----");
 					}else {
-						System.out.println("Unable to process this request at this moment, please try again later");
+						System.out.println("\nUnable to process this request at this moment, please try again later");
 					}
 				}
 			}
